@@ -12,7 +12,7 @@ else
 fi
 
 kernel_ver=$(uname -r)
-module_dir="/lib/modules/$kernel_ver/updates"
+module_dir="/lib/modules/$kernel_ver/extra"
 if [ ! -d "$module_dir" ]; then
     echo "Module directory not found: $module_dir"
     exit 1
