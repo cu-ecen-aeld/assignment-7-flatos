@@ -11,9 +11,16 @@ else
     group="wheel"
 fi
 
+kernel_ver=$(uname -r)
+module_dir="/lib/modules/$kernel_ver/updates"
+if [ ! -d "$module_dir" ]; then
+    echo "Module directory not found: $module_dir"
+    exit 1
+fi
+
 # invoke insmod with all arguments we got
 # and use a pathname, as insmod doesn't look in . by default
-insmod ./$module.ko $* || exit 1
+insmod $module_dir/$module.ko $* || exit 1
 
 # retrieve major number
 major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
