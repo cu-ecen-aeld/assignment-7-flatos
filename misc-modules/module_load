@@ -29,7 +29,9 @@ if [ ! -d "$module_dir" ]; then
 fi
 
 echo "Load our module, exit on failure"
+echo "*** ${module_dir}***${module}*** "
 insmod $module_dir/$module.ko $* || exit 1
+echo "blah"
 echo "Get the major number (allocated with allocate_chrdev_region) from /proc/devices"
 major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
 if [ ! -z ${major} ]; then
